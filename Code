@@ -1,0 +1,43 @@
+# Initialize variables for total gross and net pay
+total_gross_pay = 0
+total_net_pay = 0
+
+# Print table headers
+BOLD = '\033[1m'
+UNDERLINE = '\033[4m'
+RED = '\033[91m]'
+
+
+print(f"\n{BOLD}{'Name':<15}{'Hours Worked':<15}{'Hourly Rate':<15}{'Gross Pay':<15}{'Net Pay':<15}")
+
+# Loop through three employees
+for _ in range(3):
+    # Collecting employee information
+    name = input("Enter employee name: ")
+    hours_worked = float(input("Enter hours worked: "))
+    hourly_rate = float(input("Enter hourly rate: "))
+    tax_rate = float(input("Enter tax rate (%): "))
+
+    # Calculating gross pay
+    if hours_worked > 60:
+        pay_rate = hourly_rate * 1.6
+    elif hours_worked > 40:
+        pay_rate = hourly_rate * 1.5
+    else:
+        pay_rate = hourly_rate
+
+    gross_pay = hours_worked * pay_rate
+
+    # Calculating net pay
+    net_pay = gross_pay * (1 - tax_rate / 100)
+
+    # Updating total gross and net pay
+    total_gross_pay += gross_pay
+    total_net_pay += net_pay
+
+    # Printing employee information
+    print('\033[91m')
+    print(f"{UNDERLINE}{name:<15}{hours_worked:<15.2f}${hourly_rate:<15.2f}${gross_pay:<15.2f}${net_pay:<15.2f}")
+
+# Printing totals line
+print(f"\n{BOLD}{'Totals':<45}${total_gross_pay:<15.2f}${total_net_pay:<15.2f}")
